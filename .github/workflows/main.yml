@@ -63,7 +63,7 @@ jobs:
         # 编译 quickstart 包
         make package/feeds/nas_luci/luci-app-quickstart/compile -j$(nproc)
         make package/feeds/nas_luci/luci-app-linkease/compile -j$(nproc)
-        make package/feeds/nas_luci/luci-app-linkease/compile -j$(nproc)
+        make package/feeds/nas_luci/luci-app-ddnsto/compile -j$(nproc)
         # 编译 iStore 相关包
         make package/feeds/istore/luci-app-store/compile -j$(nproc)
         make package/feeds/istore/luci-lib-taskd/compile -j$(nproc)
@@ -80,6 +80,8 @@ jobs:
         
         # 查找所有相关IPK文件
         QUICKSTART_FILES=$(find bin/packages/aarch64_cortex-a53/ -name "*quickstart*" -type f 2>/dev/null | tr '\n' ' ' || echo "")
+        DDNSTO_FILES=$(find bin/packages/aarch64_cortex-a53/ -name "*ddnsto*" -type f 2>/dev/null | tr '\n' ' ' || echo "")
+        LINKEASE_FILES=$(find bin/packages/aarch64_cortex-a53/ -name "*linkease*" -type f 2>/dev/null | tr '\n' ' ' || echo "")       
         ISTORE_FILES=$(find bin/packages/aarch64_cortex-a53/ -name "*istore*" -type f 2>/dev/null | tr '\n' ' ' || echo "")
         STORE_DEPS_FILES=$(find bin/packages/aarch64_cortex-a53/ \( -name "*taskd*" -o -name "*xterm*" \) -type f 2>/dev/null | tr '\n' ' ' || echo "")
         
@@ -105,6 +107,8 @@ jobs:
         name: compiled-ipk-packages
         path: |
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*quickstart*
+          immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*ddnsto*
+          immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*linkease*
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*store*    # 已修改
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*taskd*
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*xterm*
@@ -138,6 +142,8 @@ jobs:
         prerelease: true
         files: |
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*quickstart*
+          immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*ddnsto*
+          immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*linkease*
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*istore*
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*taskd*
           immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64/bin/packages/aarch64_cortex-a53/**/*xterm*
@@ -155,6 +161,8 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "**Built Packages:**" >> $GITHUB_STEP_SUMMARY
         echo "- QuickStart (luci-app-quickstart)" >> $GITHUB_STEP_SUMMARY
+        echo "- DDNSTO (luci-app-ddnsto)" >> $GITHUB_STEP_SUMMARY
+        echo "- LinkEase (luci-app-linkease)" >> $GITHUB_STEP_SUMMARY
         echo "- iStore (luci-app-store)" >> $GITHUB_STEP_SUMMARY
         echo "- iStore Dependencies (luci-lib-taskd, luci-lib-xterm)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
