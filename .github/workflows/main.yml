@@ -62,6 +62,8 @@ jobs:
         cd immortalwrt-sdk-24.10.4-mediatek-filogic_gcc-13.3.0_musl.Linux-x86_64
         # 编译 quickstart 包
         make package/feeds/nas_luci/luci-app-quickstart/compile -j$(nproc)
+        make package/feeds/nas_luci/luci-app-linkease/compile -j$(nproc)
+        make package/feeds/nas_luci/luci-app-linkease/compile -j$(nproc)
         # 编译 iStore 相关包
         make package/feeds/istore/luci-app-store/compile -j$(nproc)
         make package/feeds/istore/luci-lib-taskd/compile -j$(nproc)
